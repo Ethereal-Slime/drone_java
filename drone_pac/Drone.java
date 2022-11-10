@@ -1,6 +1,8 @@
 package drone_pac;
 
 
+import javax.xml.xpath.XPath;
+
 import drone_pac.DirectionEnum.Direction;
 
 
@@ -23,6 +25,39 @@ public class Drone {
 
     public String toString() {
         return "the Drone " + Droneid + " is at x: " + x_pos + " and y: " + y_pos + " in direction " + Dir.name();
+    }
+
+    public int getX() {
+        return x_pos;
+    } 
+
+    public int getY(){
+        return y_pos;
+    }
+
+    public Direction getDirection() {
+        return Dir;
+        
+    }
+
+    public void setDirection(Direction d) {
+        Dir = d;
+        
+    }
+    public void setX(int Nxpos) {
+        x_pos= Nxpos;
+    } 
+
+    public void setY(int Nypos){
+        y_pos= Nypos;
+    }
+
+    public int getDroneid(){
+        return Droneid;
+    }
+
+    public void setId(int NId) {
+        Droneid = NId;    
     }
 
     public boolean isHere (int sx, int sy) {

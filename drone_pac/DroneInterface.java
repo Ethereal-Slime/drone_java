@@ -3,8 +3,10 @@ import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 import drone_pac.DroneArena;
 /**
@@ -123,30 +125,54 @@ public class DroneInterface {
 		try {
 			System.out.println("Enter a file name to write");
 			String file_name = s.nextLine();
-			FileOutputStream fos = new FileOutputStream(file_name+".txt", true);
+			// FileOutputStream fos = new FileOutputStream(file_name+".txt", true);
+			File file = new File(file_name + ".txt");
+			FileWriter fw = new FileWriter(file);
+
+			// write arena data.
+			fw.write("arena," + myArena.get_x()+","+myArena.get_y()+"\n");
+	
+
+			for (Drone d : myArena.Drone_array) {
+				fw.write("drone," +d.getDroneid()+","+d.getX()+","+d.getY()+","+d.getDirection()+"\n");
+				// write drone data
+			}
 			
 			//enter file conetent here
 			//System.out.println("enter file content here");
-			String str= myArena.toString();      //str stores the string which we have entered  
-			byte[] b= str.getBytes();       //converts string into bytes  
-			fos.write(b);           //writes bytes into file  
-			fos.close();            //close the file  
-			System.out.println("file saved.");  
+          //writes bytes into file  
+		  	fw.flush();
+			fw.close();            //close the file  
+			System.out.println("file Written.");  
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 	
-	// FileReader and BufferedReader
+	//FileReader and BufferedReader
 	void load(){
 		System.out.println("Enter a file name to Load");
 		String file_name = s.nextLine();   
 		try (BufferedReader br = new BufferedReader(new FileReader(file_name))){
-
 			String line;
 			while((line = br.readLine()) != null){
+				String[] dl = line.split(",");
+				if (dl[0]== "arena"){
+					int x = Integer.parseInt(dl[1]);
+					int y = Integer.parseInt(dl[2]);
+					myArena.set_x(x);
+					myArena.set_y(y);
 
+
+				}
+				else{
+					int x = Integer.parseInt(dl[1]);
+					myArena.Drone_array.get(x);
+					
+				}
+
+				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -171,8 +197,8 @@ public class DroneInterface {
 	}
     
 	void doDisplay(){
-		int x = DroneArena.get_x(myArena);
-		int y = DroneArena.get_y(myArena);
+		int x = myArena.get_x();
+		int y = myArena.get_y();
 		ConsoleCanvas Arena = new ConsoleCanvas(x, y);
 		myArena.showDrones(Arena);
 		System.out.println(Arena.toString());

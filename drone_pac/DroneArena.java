@@ -70,13 +70,24 @@ public class DroneArena {
         
     }
 
-    public static int get_x(DroneArena a){
-        return a.x; //gets the x values from drone object a 
+    public int get_x(){
+        return x; //gets the x values from drone object a 
     }
 
-    public static int get_y(DroneArena a){
-        return a.y; //gets the y values from drone object a 
+    public int get_y(){
+        return y; //gets the y values from drone object a 
     }
+
+
+
+    public void set_x(int loadX){
+        x = loadX; //gets the x values from drone object a 
+    }
+
+    public void set_y(int loadY){
+        y = loadY; //gets the y values from drone object a 
+    }
+
 
     public void moveAllDrones(DroneArena da){
         for (Drone d : Drone_array){

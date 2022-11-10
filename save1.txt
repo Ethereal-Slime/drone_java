@@ -1,0 +1,7 @@
+arena,6,20
+drone1,3,3
+drone2,4,5
+drone3,2,16
+drone4,3,4
+drone5,1,18
+drone6,4,15
