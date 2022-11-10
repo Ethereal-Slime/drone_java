@@ -2,6 +2,7 @@ package drone_pac;
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+import java.io.FileOutputStream;
 
 /**
  * Simple program to show arena with multiple drones
@@ -98,6 +99,7 @@ public class DroneInterface {
 			boolean result = file.createNewFile();
 			if (result){
 				System.out.println("file sucessfully created");
+				write();
 			}
 			else{
 				System.out.println("file already exists at location: "+file.getCanonicalPath());
@@ -108,8 +110,39 @@ public class DroneInterface {
 	}
 
 
-	void load(){
+	void write(){
+		try {
+			System.out.println("Enter a file name to write");
+			String file_name = s.nextLine();
+			FileOutputStream fos = new FileOutputStream(file_name+".txt", true);
 
+			//enter file conetent here
+			System.out.println("enter file content here");
+			String str= s.nextLine()+"\n";      //str stores the string which we have entered  
+			byte[] b= str.getBytes();       //converts string into bytes  
+			fos.write(b);           //writes bytes into file  
+			fos.close();            //close the file  
+			System.out.println("file saved.");  
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+
+	void load(){
+		try {
+			System.out.println("Enter a file name to Load");
+			String file_name = s.nextLine();
+			Scanner myReader = new Scanner(file_name+".txt");
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+				System.out.println(data);
+			}
+			myReader.close();
+		  } catch (Exception e) {
+			e.printStackTrace();
+		  }
 	}
     
 	void doDisplay(){
