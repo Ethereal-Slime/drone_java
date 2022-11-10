@@ -1,9 +1,12 @@
 package drone_pac;
 import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 
+import drone_pac.DroneArena;
 /**
  * Simple program to show arena with multiple drones
 * @author shsmchlr
@@ -25,6 +28,7 @@ public class DroneInterface {
         char ch = ' ';
         do {
         	System.out.print("Enter (A)dd drone, get (I)nformation, show arena (D)isplay,(M)ove Drones, Enter (C)ustomise to change arena size or e(X)it > ");
+			System.out.print("Enter (S)ave or Enter (L)oad ");
         	ch = s.next().charAt(0);
         	s.nextLine();
         	switch (ch) {
@@ -53,8 +57,8 @@ public class DroneInterface {
 							myArena = new DroneArena(u_height, u_width);
 							
 							break;
-				case 'M':
-				case 'm':
+				case 'z':
+				case 'Z':
 							for (int i = 0; i < 10; i++) {
 								myArena.moveAllDrones(myArena);
 								doDisplay();
@@ -65,7 +69,11 @@ public class DroneInterface {
 								}
 							}			
 
-
+							break;
+				case 'm':
+				case 'M':
+							myArena.moveAllDrones(myArena);	
+							doDisplay();
 /* 							myArena.moveAllDrones(myArena);	
 							doDisplay();
 							try {
@@ -83,6 +91,7 @@ public class DroneInterface {
 
 				case 'l':
 				case 'L':
+							load();
 							break;
 
         	}
@@ -115,10 +124,10 @@ public class DroneInterface {
 			System.out.println("Enter a file name to write");
 			String file_name = s.nextLine();
 			FileOutputStream fos = new FileOutputStream(file_name+".txt", true);
-
+			
 			//enter file conetent here
-			System.out.println("enter file content here");
-			String str= s.nextLine()+"\n";      //str stores the string which we have entered  
+			//System.out.println("enter file content here");
+			String str= myArena.toString();      //str stores the string which we have entered  
 			byte[] b= str.getBytes();       //converts string into bytes  
 			fos.write(b);           //writes bytes into file  
 			fos.close();            //close the file  
@@ -129,10 +138,26 @@ public class DroneInterface {
 
 	}
 	
-
+	// FileReader and BufferedReader
 	void load(){
-		try {
-			System.out.println("Enter a file name to Load");
+		System.out.println("Enter a file name to Load");
+		String file_name = s.nextLine();   
+		try (BufferedReader br = new BufferedReader(new FileReader(file_name))){
+
+			String line;
+			while((line = br.readLine()) != null){
+
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+   
+
+
+
+
+
+/* 			System.out.println("Enter a file name to Load");
 			String file_name = s.nextLine();
 			Scanner myReader = new Scanner(file_name+".txt");
 			while (myReader.hasNextLine()) {
@@ -142,7 +167,7 @@ public class DroneInterface {
 			myReader.close();
 		  } catch (Exception e) {
 			e.printStackTrace();
-		  }
+		  } */
 	}
     
 	void doDisplay(){

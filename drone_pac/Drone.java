@@ -19,8 +19,6 @@ public class Drone {
     
         count++;
         Droneid = count;
-
-
     }
 
     public String toString() {
@@ -44,47 +42,49 @@ public class Drone {
 
     public void move_drone(DroneArena dArena) {
         int x_direc, y_direc;
-        switch (Dir.name()) {
-            case "North":
+        switch (Dir) {
+            case North:
                 y_direc = -1;
                 if((dArena.canMoveHere((x_pos), (y_pos+y_direc)))){
                     y_pos = y_pos + y_direc; 
                     
                 }
                 else{
-                    Dir = Dir.get_next_pos();
+                    Dir = Direction.East;
                 }
                 break;
 
-            case "South":
-                y_direc = 1;
-                if((dArena.canMoveHere((x_pos), (y_pos+y_direc)))){
-                    y_pos = y_pos + y_direc;
-                }
-                else{
-                    Dir = Dir.get_next_pos();
-                }            
-                break;
-
-            case "West":
-                x_direc = -1;
-                if((dArena.canMoveHere((x_pos+x_direc), (y_pos)))){
-                    x_pos = x_pos + x_direc;
-                }
-                else{
-                    Dir = Dir.get_next_pos();
-                }               
-                break;
-
-            case "East":
+            case East:
                 x_direc = 1;
                 if((dArena.canMoveHere((x_pos + x_direc), (y_pos)))){
                     x_pos = x_pos + x_direc;
                 }
                 else{
-                    Dir = Dir.get_next_pos();
+                    Dir = Direction.South;
                 }               
                 break;
+
+            case South:
+                y_direc = 1;
+                if((dArena.canMoveHere((x_pos), (y_pos+y_direc)))){
+                    y_pos = y_pos + y_direc;
+                }
+                else{
+                    Dir = Direction.West;
+                }            
+                break;
+
+            case West:
+                x_direc = -1;
+                if((dArena.canMoveHere((x_pos+x_direc), (y_pos)))){
+                    x_pos = x_pos + x_direc;
+                }
+                else{
+                    Dir = Direction.North;
+                }               
+                break;
+
+
         }
         
     } 
