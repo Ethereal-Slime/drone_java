@@ -1,5 +1,7 @@
 package drone_pac;
 import java.util.Scanner;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Simple program to show arena with multiple drones
@@ -75,6 +77,7 @@ public class DroneInterface {
 							
 				case 's':
 				case 'S':
+							save();
 							break;
 
 				case 'l':
@@ -86,6 +89,28 @@ public class DroneInterface {
         
        s.close();									// close scanner
     }
+
+	void save(){
+		System.out.println("Enter a file name: ");
+		String file_name = s.nextLine();
+		File file = new File(file_name+".txt");
+		try {
+			boolean result = file.createNewFile();
+			if (result){
+				System.out.println("file sucessfully created");
+			}
+			else{
+				System.out.println("file already exists at location: "+file.getCanonicalPath());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	void load(){
+
+	}
     
 	void doDisplay(){
 		int x = DroneArena.get_x(myArena);
