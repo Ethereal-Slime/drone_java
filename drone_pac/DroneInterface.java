@@ -168,8 +168,9 @@ public class DroneInterface {
 				}
 				else{
 					int x = Integer.parseInt(dl[1]);
-					myArena.Drone_array.get(x);
-					
+					//Drone.setX(myArena.Drone_array.get(0));
+
+
 				}
 
 				

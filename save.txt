@@ -1,0 +1,8 @@
+arena,6,20
+drone,1,1,18,West
+drone,2,1,2,North
+drone,3,1,5,North
+drone,4,4,3,South
+drone,5,4,16,South
+drone,6,1,9,North
+drone,7,2,14,West
